@@ -1,0 +1,6 @@
+Gene,Posterior_Probability_Shared_Across_Species,Median_Number_of_Species_With_Gene
+OXA,0.99875,14.0
+IMP,0.99975,14.0
+FOX,0.99975,13.0
+CTXM1,0.99,11.0
+TEM,0.9955,12.0

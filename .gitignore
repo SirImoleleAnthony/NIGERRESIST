@@ -1,0 +1,72 @@
+# --- Secrets & environment ---
+.env
+*.env
+.env.*
+
+# --- Streamlit secrets (auto-ignored, but be explicit) ---
+.streamlit/secrets.toml
+
+# --- Python ---
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# --- RAG cache (rebuilt on first run in the cloud) ---
+rag_cache/
+
+# --- Vector / embedding stores ---
+chromadb_store/
+
+# --- Large archive ---
+bhm_results.rar
+
+# --- Local dev / scratch files ---
+streamlit_output.log
+diagnose_pdfs.py
+verify_rag_setup.py
+verify_setup.py
+setup_weaviate.ps1
+setup_weaviate.py
+weaviate_config.py
+docker-compose.yml
+
+# --- Old Weaviate / migration docs ---
+WEAVIATE_IMPLEMENTATION_SUMMARY.md
+WEAVIATE_MIGRATION.md
+WEAVIATE_QUICKSTART.md
+
+# --- Test scripts ---
+test_features.py
+test_pdf_simple.py
+test_rag_load.py
+test_shap_filter.py
+test_shap_fixes.py
+test_shap_simple.py
+
+# --- Misc dev docs (not needed in production) ---
+API_KEY_SETUP.md
+CONFORMAL_INTEGRATION_GUIDE.md
+DELIVERY_SUMMARY.txt
+HALLUCINATION_FIX_GUIDE.md
+IMPLEMENTATION_COMPLETE.md
+PDF_CHUNKING_FIX.md
+QUICK_REFERENCE.txt
+QUICKSTART.md
+RAG_BACKGROUND_LOADING.md
+RAG_SETUP_GUIDE.md
+SETUP_COMPLETE.md
+SHAP_FIXES_SUMMARY.md
+TEST_REPORT.md
+TESTING_AND_NEXT_STEPS.md
+
+# --- Loose PDFs in root (they belong in rag_files/) ---
+*.pdf
+
+# --- OS ---
+.DS_Store
+Thumbs.db

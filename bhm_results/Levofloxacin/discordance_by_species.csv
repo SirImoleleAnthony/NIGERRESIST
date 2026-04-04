@@ -1,0 +1,15 @@
+Species,Total_Isolates,Discordant_Count,Discordance_Rate_%
+Citrobacter freundii,62,0,0.0
+Enterobacter cloacae,196,40,20.408163265306122
+Enterobacter hormaechi,140,16,11.428571428571429
+Enterobacter spp,58,8,13.793103448275861
+Escherichia coli,3662,344,9.39377389404697
+Klebsiella aerogenes,42,0,0.0
+Klebsiella oxytoca,18,0,0.0
+Klebsiella pneumoniae,5988,1456,24.315297261189045
+Morganella morganii,20,0,0.0
+Proteus mirabilis,340,32,9.411764705882353
+Providencia rettgeri,36,0,0.0
+Providencia spp,12,0,0.0
+Providencia stuartii,62,0,0.0
+Pseudomonas aeruginosa,476,36,7.563025210084033

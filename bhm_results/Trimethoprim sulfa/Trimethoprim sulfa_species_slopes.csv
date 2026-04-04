@@ -1,0 +1,15 @@
+Species,Median_Slope_Resistance_Change_per_Year,Probability_Slope_Positive
+Enterobacter spp,0.7591106915457579,0.90675
+Klebsiella aerogenes,0.16702033824475776,0.594
+Proteus mirabilis,0.1511321510955841,0.8095
+Citrobacter freundii,0.10444616799855855,0.5585
+Pseudomonas aeruginosa,0.08775546326979013,0.5605
+Enterobacter cloacae,0.03074423044024499,0.52125
+Morganella morganii,0.013075971986261047,0.507
+Providencia stuartii,-0.015299026915839516,0.493
+Providencia spp,-0.06943453265044121,0.46675
+Klebsiella pneumoniae,-0.07282294632704156,0.04025
+Escherichia coli,-0.08241667390774418,0.02425
+Providencia rettgeri,-0.30238638270470164,0.35325
+Enterobacter hormaechi,-1.1324849281526368,0.004
+Klebsiella oxytoca,-1.9776280716007386,0.0
