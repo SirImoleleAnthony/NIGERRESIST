@@ -100,19 +100,200 @@ selected = option_menu(
 # Data is loaded lazily per page to avoid errors if files are missing
 
 if selected == 'Home':
-    st.title("Welcome to the Nigeria AMR Hub! " + page_icon)
+    # ── Hero ──────────────────────────────────────────────────────────────────
+    st.markdown(
+        """
+        <div style="
+            background: linear-gradient(135deg, #0d6efd18 0%, #19875418 100%);
+            border-left: 5px solid #0d6efd;
+            border-radius: 8px;
+            padding: 1.6rem 2rem 1.4rem 2rem;
+            margin-bottom: 1.5rem;
+        ">
+            <h1 style="margin:0 0 0.4rem 0; font-size:2.1rem;">
+                🦠🧬💊 Welcome to the <span style="color:#0d6efd;">Nigeria AMR Hub</span>
+            </h1>
+            <p style="font-size:1.1rem; margin:0; color:#444;">
+                A data-driven intelligence platform for understanding, predicting, and communicating 
+                antimicrobial resistance (AMR) in Nigeria — built for scientists, clinicians, and 
+                policymakers who need answers, not just data.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # ── What is AMR & why this matters ───────────────────────────────────────
+    st.markdown("## 🌍 Why AMR Matters in Nigeria")
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Antibiotic Classes Tracked", "18", help="Across all major clinical drug classes")
+    c2.metric("Bacterial Species Profiled", "7+", help="Including priority ESKAPE pathogens")
+    c3.metric("Surveillance Years Covered", "2013 – 2023", help="A decade of longitudinal AMR data")
+
     st.markdown("""
-    The Nigeria AMR Hub is a comprehensive platform dedicated to addressing the challenges of antimicrobial resistance (AMR) in Nigeria. Our mission is to provide a centralized resource for researchers, healthcare professionals, policymakers, and the general public to access data, insights, and tools related to AMR in Nigeria. 
+Antimicrobial resistance is one of the greatest public-health threats of our time.  
+In Nigeria — home to Africa's largest population — the problem is especially acute: 
+limited surveillance infrastructure, high antibiotic use, and under-resourced laboratories 
+make it difficult to know *which drugs still work* and *where resistance is spreading*.  
 
-    **Key Features:**
-    - **Data Repository:** Access a wide range of datasets related to AMR in Nigeria, including surveillance data, research studies, and clinical reports.
-    - **Data Analysis Tools:** Utilize built-in tools for analyzing AMR data, identifying trends, and generating visualizations.
-    - **Statistical Analysis:** Perform advanced statistical analyses to understand the factors contributing to AMR and evaluate intervention strategies.
-    - **Machine Learning Models:** Train and deploy machine learning models to predict AMR patterns and inform decision-making.
-    - **Community Engagement:** Connect with experts, share insights, and collaborate on initiatives to combat AMR in Nigeria.
-
-    Join us in our efforts to combat antimicrobial resistance and improve public health outcomes in Nigeria!
+The **Nigeria AMR Hub** was built to change that.  
+By combining a curated AMR dataset with machine learning, Bayesian modelling, causal inference, 
+and AI-powered document retrieval, this platform puts powerful analytical tools directly in the 
+hands of the people who need them most.
     """)
+
+    st.divider()
+
+    # ── Who is this for? ──────────────────────────────────────────────────────
+    st.markdown("## 👥 Who Is This Platform For?")
+    col_a, col_b, col_c, col_d = st.columns(4)
+    with col_a:
+        st.markdown("""
+**🔬 Researchers & Bioinformaticians**  
+Explore resistant gene profiles, run Bayesian hierarchical models, and interrogate AMR trends 
+across species and time — all without writing a single line of code.
+        """)
+    with col_b:
+        st.markdown("""
+**🏥 Clinicians & Infection Specialists**  
+Quickly check resistance patterns for specific organisms and antibiotics, helping guide 
+empirical therapy decisions at the bedside.
+        """)
+    with col_c:
+        st.markdown("""
+**📊 Public Health Officials & Epidemiologists**  
+Analyse population-level resistance trends, visualise geographic and temporal spread, 
+and run causal analyses to evaluate intervention strategies.
+        """)
+    with col_d:
+        st.markdown("""
+**🏛️ Policymakers & Stewardship Teams**  
+Use predictive models and trend forecasts to prioritise antibiotic stewardship programmes 
+and allocate resources where resistance pressure is highest.
+        """)
+
+    st.divider()
+
+    # ── Feature deep-dives ────────────────────────────────────────────────────
+    st.markdown("## 🚀 Platform Features — What You Can Do & Why It Matters")
+
+    with st.expander("📊  Data Analysis — Visualise resistance patterns at a glance", expanded=True):
+        st.markdown("""
+Resistance data is only useful if you can *see* it clearly.  
+The **Data Analysis** page lets you:
+- Plot **resistance trends over time** for any antibiotic, instantly revealing whether 
+  a drug is becoming less effective year by year.
+- Break down resistance by **bacterial species, patient age group, gender, clinical 
+  speciality, and sample source** — so you can identify which populations or wards 
+  are most affected.
+- Inspect **MIC (Minimum Inhibitory Concentration) distributions** to understand how 
+  resistance is distributed across the clinical continuum, beyond simple S/I/R categories.
+- Explore **species–resistance co-occurrence patterns** to spot problematic multi-drug 
+  resistant (MDR) combinations.
+
+**Why it matters:** Visualising where and how resistance clusters are forming is the 
+first step toward targeted interventions.
+        """)
+
+    with st.expander("📈  Statistical Analysis — Go beyond charts to rigorous inference"):
+        st.markdown("""
+Raw visualisations tell you *what* is happening; statistical models tell you *why*.  
+The **Statistical Analysis** page provides:
+- **Bayesian Hierarchical Models (BHM):** Estimate resistance rates across antibiotics 
+  and species while properly accounting for small sample sizes and between-group 
+  variation — critical in settings where surveillance data is sparse.
+- **Non-Redundant Resistance Score (NRRS) Analysis:** Quantify the *breadth* of 
+  resistance beyond individual drug counts, identifying organisms with truly multi-modal 
+  resistance profiles.
+- **Horizontal Gene Transfer (HGT) Analysis:** Detect shared resistance gene patterns 
+  across species that may indicate active plasmid-mediated spread of resistance.
+- **Temporal Trend Analysis:** Use time-series decomposition and forecasting (Prophet) 
+  to project future resistance trajectories under current conditions.
+- **Causal Inference:** Move from correlation to causation — use DoWhy-powered causal 
+  graphs to estimate the effect of specific genes, species, or time periods on resistance 
+  outcomes.
+
+**Why it matters:** Evidence-based stewardship and policy requires causal understanding, 
+not just correlation — this page gives you that rigour.
+        """)
+
+    with st.expander("🤖  Train Model — Build your own resistance predictor"):
+        st.markdown("""
+Every institution's AMR profile is different.  
+The **Train Model** page lets you:
+- Upload your own dataset **or** use the built-in Nigeria AMR dataset.
+- Choose from **eight machine learning algorithms** — Random Forest, Gradient Boosting, 
+  XGBoost, CatBoost, LightGBM, Logistic Regression, SVM, and KNN.
+- Select your target antibiotic and feature columns, then train in one click.
+- Evaluate model quality with full metrics: accuracy, precision, recall, F1-score, 
+  and a visual confusion matrix.
+- Download the trained model (`.pkl`) for use outside the platform.
+
+**Why it matters:** A model trained on *your* local data will outperform any global 
+generalisation — and now you can build it without a data science team.
+        """)
+
+    with st.expander("🔮  Make Prediction — Real-time resistance prediction for new isolates"):
+        st.markdown("""
+Once a model is trained, the **Make Prediction** page turns it into a clinical decision-support tool:
+- Enter the characteristics of a new bacterial isolate (species, gene markers, MIC values, etc.).
+- Get an **instant prediction** of susceptibility or resistance to the target antibiotic.
+- Understand model confidence through **SHAP-based feature importance** — see *which 
+  features drove the prediction* so clinicians can validate the result against their 
+  clinical judgement.
+- Run **batch predictions** on a CSV of multiple isolates at once.
+
+**Why it matters:** Rapid, explainable predictions can bridge the gap while waiting 
+for confirmatory lab results, especially in resource-limited settings.
+        """)
+
+    with st.expander("💬  Chat with Data — Ask questions in plain English"):
+        st.markdown("""
+Not everyone wants to click through charts — sometimes you just need an answer.  
+The **Chat with Data** page combines a retrieval-augmented generation (RAG) system 
+with an AI assistant so you can:
+- Ask questions about the **Nigeria AMR dataset** in natural language 
+  (e.g. *"What is the resistance rate of E. coli to Ciprofloxacin?"*).
+- Query **curated research documents** — including the Nigeria One Health AMR 
+  National Action Plan 2024–2028 and published African AMR studies — for policy and 
+  literature context.
+- Upload **your own PDFs or CSVs** and immediately ask questions about them.
+- Maintain a **multi-turn conversation** so follow-up questions build on prior context.
+
+**Why it matters:** Democratising data access means any stakeholder — not just analysts 
+— can extract insight without needing to know SQL, Python, or statistics.
+        """)
+
+    st.divider()
+
+    # ── Dataset snapshot ──────────────────────────────────────────────────────
+    st.markdown("## 📂 What Data Does the Platform Include?")
+    st.markdown("""
+The core dataset is the **Nigeria AMR Full Dataset** — a longitudinal surveillance 
+record spanning **2013–2023** with **over 11,100 isolate records** covering:
+
+| Category | Details |
+|---|---|
+| **Bacterial Species** | *E. coli*, *K. pneumoniae*, *P. aeruginosa*, *A. baumannii*, *S. aureus*, and more |
+| **Antibiotics** | 18 drugs across 7 classes (penicillins, cephalosporins, carbapenems, fluoroquinolones, aminoglycosides, polymyxins, tetracyclines) |
+| **Resistance Genes** | MCR, KPC, NDM, OXA, CTX-M, and other clinically critical genes |
+| **Patient Demographics** | Age group, gender, clinical speciality, sample source |
+| **MIC Values** | Raw MIC readings for quantitative analysis |
+
+In addition, **peer-reviewed research documents and policy papers** are indexed 
+and searchable through the **Chat with Data** page.
+    """)
+
+    st.divider()
+
+    # ── CTA ───────────────────────────────────────────────────────────────────
+    st.markdown("## 🏁 Get Started")
+    st.info(
+        "👆 Use the navigation bar above to jump to any feature.\n\n"
+        "New here? Start with **Data Analysis** to explore the built-in dataset, "
+        "then try **Chat with Data** to ask questions in plain English.\n\n"
+        "Have your own isolate data? Head to **Train Model** to build a custom predictor."
+    )
 
 
 elif selected == 'Chat with Data':
@@ -857,19 +1038,204 @@ elif selected == 'Make Prediction':
     make_prediction()
 
 elif selected == 'About':
-    st.title("About " + page_icon)
+    st.markdown(
+        """
+        <div style="
+            background: linear-gradient(135deg, #19875418 0%, #0d6efd18 100%);
+            border-left: 5px solid #198754;
+            border-radius: 8px;
+            padding: 1.6rem 2rem 1.4rem 2rem;
+            margin-bottom: 1.5rem;
+        ">
+            <h1 style="margin:0 0 0.4rem 0; font-size:2.1rem;">
+                About the 🦠🧬💊 Nigeria AMR Hub
+            </h1>
+            <p style="font-size:1.05rem; margin:0; color:#444;">
+                Open-source · Data-driven · Built for Africa
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # ── Platform overview ─────────────────────────────────────────────────────
+    st.markdown("## 🌐 The Platform")
     st.markdown("""
-    The Nigeria AMR Hub is a collaborative initiative aimed at addressing the challenges of antimicrobial resistance (AMR) in Nigeria. Our platform provides a centralized resource for researchers, healthcare professionals, policymakers, and the general public to access data, insights, and tools related to AMR in Nigeria. 
+The **Nigeria AMR Hub** is an open, data-driven intelligence platform dedicated to 
+understanding, tracking, and predicting antimicrobial resistance (AMR) in Nigeria.  
 
-    **Our Mission:**
-    To combat antimicrobial resistance in Nigeria by providing comprehensive data, analysis tools, and predictive models to inform decision-making and drive evidence-based interventions.
+Antimicrobial resistance — the ability of bacteria, viruses, fungi, and parasites to 
+evolve and defeat the drugs designed to kill them — is responsible for an estimated 
+**1.27 million deaths globally each year** (*Lancet*, 2022), with sub-Saharan Africa 
+bearing a disproportionate burden.  In Nigeria, AMR surveillance is fragmented, 
+laboratory capacity is limited, and evidence-based stewardship remains a challenge 
+at both the clinical and policy level.
 
-    **Our Team:**
-    We are a multidisciplinary team of researchers, data scientists, healthcare professionals, and policymakers dedicated to addressing the challenges of AMR in Nigeria. Our team collaborates with local and international partners to ensure that our platform is up-to-date and relevant to the needs of our users.
+This platform was built to bridge that gap by:
+- Centralising a decade of Nigerian AMR surveillance data in one accessible place.
+- Providing analytical and machine-learning tools that require *no coding expertise*.
+- Making published AMR research and policy documents instantly searchable and queryable.
+- Supporting policymakers, researchers, and clinicians with models they can trust and explain.
+    """)
 
-    **Contact Us:**
-    If you have any questions, suggestions, or would like to collaborate with us, please feel free to reach out! You can contact us at [email address] or follow us on social media for updates and news about our work.
+    st.divider()
 
-    Join us in our efforts to combat antimicrobial resistance and improve public health outcomes in Nigeria!
+    # ── Mission & Vision ──────────────────────────────────────────────────────
+    st.markdown("## 🎯 Mission & Vision")
+    mc, vc = st.columns(2)
+    with mc:
+        st.markdown("""
+**Our Mission**
+
+To combat antimicrobial resistance in Nigeria by providing comprehensive, 
+accessible data analysis tools and predictive models that empower evidence-based 
+decision-making across the clinical, research, and policy spectrum.
+        """)
+    with vc:
+        st.markdown("""
+**Our Vision**
+
+A Nigeria — and an Africa — where data-driven AMR surveillance informs every 
+antibiotic prescription, every stewardship programme, and every health policy 
+decision, ultimately reducing preventable deaths from resistant infections.
+        """)
+
+    st.divider()
+
+    # ── What makes it different ───────────────────────────────────────────────
+    st.markdown("## ⚙️ Technical Approach")
+    st.markdown("""
+The Nigeria AMR Hub is built on a modern, modular technical stack designed for 
+reproducibility and extensibility:
+
+| Component | Technology |
+|---|---|
+| **Web Application** | Streamlit (Python) |
+| **Machine Learning** | scikit-learn, XGBoost, CatBoost, LightGBM |
+| **Statistical Modelling** | PyMC (Bayesian Hierarchical Models), Prophet (time-series forecasting) |
+| **Causal Inference** | DoWhy + NetworkX |
+| **AI / RAG Chat** | LangChain · FAISS vector store · OpenAI GPT-4o-mini · text-embedding-3-small |
+| **Explainability** | SHAP (SHapley Additive exPlanations) |
+| **Data** | Longitudinal Nigerian AMR surveillance dataset (2013–2023) |
+
+All modelling code is open and auditable. Predictions are accompanied by 
+feature-importance explanations so users can validate results against domain knowledge.
+    """)
+
+    st.divider()
+
+    # ── Data & Acknowledgements ───────────────────────────────────────────────
+    st.markdown("## 📂 Data Sources & Acknowledgements")
+    st.markdown("""
+**Primary dataset:** Nigeria AMR Full Dataset — longitudinal isolate-level surveillance 
+records covering 2013–2023, including species, MIC values, interpretive categories 
+(S/I/R), resistance genes, and patient demographics.
+
+**Reference documents indexed in the Chat system:**
+- *One Health AMR National Action Plan 2.0 (2024–2028)* — Federal Ministry of Health, Nigeria  
+- *Addressing Multidrug-Resistant Organisms (MDROs)* — Clinical guidance document  
+- *Status of Antimicrobial Stewardship Programmes in Nigerian Tertiary Healthcare Facilities*  
+- *Research Works on AMR in Africa and Nigeria* — Compiled research digest  
+- *Antibiotic Monograph* — Reference drug information
+
+We acknowledge the researchers, clinicians, and laboratory scientists across Nigeria 
+whose surveillance work produced the underlying data that powers this platform.
+    """)
+
+    st.divider()
+
+    # ── Team ─────────────────────────────────────────────────────────────────
+    st.markdown("## 👥 Meet the Team")
+    st.markdown("""
+The **Nigeria AMR Hub** team is a group of dedicated individuals committed to advancing 
+the fight against antimicrobial resistance through innovative data analysis and machine 
+learning techniques. Our team consists of data scientists, bioinformaticians, and 
+healthcare professionals who are passionate about leveraging technology to improve 
+patient outcomes and public health.
+    """)
+
+    tm1, tm2 = st.columns(2, gap="large")
+
+    with tm1:
+        st.markdown("""
+<div style="
+    background:#f8f9fa;
+    border-radius:10px;
+    padding:1.3rem 1.5rem;
+    border-top:4px solid #0d6efd;
+    height:100%;
+">
+    <h3 style="margin-top:0;">Anthony Godswill Imolele</h3>
+    <p style="margin:0.2rem 0;"><b>Role:</b> Research Scientist, Genomics Unit</p>
+    <p style="margin:0.2rem 0;"><b>Affiliation:</b> Helix Biogen Institute, Ogbomosho, Nigeria</p>
+    <p style="margin:0.2rem 0;"><b>Expertise:</b> Computational Biology · AI for Healthcare</p>
+    <br/>
+    <a href="https://www.linkedin.com/in/godswill-anthony-850639199/" target="_blank"
+       style="
+           display:inline-block;
+           background:#0077b5;
+           color:#fff;
+           padding:0.35rem 0.9rem;
+           border-radius:5px;
+           text-decoration:none;
+           font-size:0.9rem;
+       ">🔗 LinkedIn</a>
+</div>
+        """, unsafe_allow_html=True)
+
+    with tm2:
+        st.markdown("""
+<div style="
+    background:#f8f9fa;
+    border-radius:10px;
+    padding:1.3rem 1.5rem;
+    border-top:4px solid #198754;
+    height:100%;
+">
+    <h3 style="margin-top:0;">Teye Richard Gamah</h3>
+    <p style="margin:0.2rem 0;"><b>Role:</b> Bioinformatician & ML Engineer</p>
+    <p style="margin:0.2rem 0;"><b>Affiliation:</b> Valley View University, Accra, Ghana</p>
+    <p style="margin:0.2rem 0;"><b>Expertise:</b> Bioinformatics · DataCamp Certified Data Scientist · Machine Learning</p>
+    <br/>
+    <a href="https://www.linkedin.com/in/gamah/" target="_blank"
+       style="
+           display:inline-block;
+           background:#0077b5;
+           color:#fff;
+           padding:0.35rem 0.9rem;
+           border-radius:5px;
+           text-decoration:none;
+           font-size:0.9rem;
+       ">🔗 LinkedIn</a>
+</div>
+        """, unsafe_allow_html=True)
+
+    st.divider()
+
+    # ── Disclaimer ────────────────────────────────────────────────────────────
+    st.markdown("## ⚠️ Disclaimer")
+    st.warning("""
+The Nigeria AMR Hub is intended for **research, education, and public health informatics purposes only**.  
+It is **not a clinical diagnostic tool**.  
+Predictions and analyses generated by this platform should **not** replace professional 
+medical judgement, laboratory confirmation, or established clinical guidelines.  
+Always consult a qualified healthcare professional for patient care decisions.
+    """)
+
+    # ── Contact ───────────────────────────────────────────────────────────────
+    st.divider()
+    st.markdown("## 📬 Get in Touch")
+    st.markdown("""
+We welcome collaborations, dataset contributions, and feedback from researchers, 
+clinicians, and public health professionals.  
+
+- **Anthony Godswill Imolele:** [LinkedIn](https://www.linkedin.com/in/godswill-anthony-850639199/)  
+- **Teye Richard Gamah:** [LinkedIn](https://www.linkedin.com/in/gamah/)  
+
+If you would like to contribute data, report a bug, or propose a new feature, 
+please reach out via LinkedIn or open an issue on the project repository.
+
+*Together, we can build a future where antimicrobial resistance no longer claims 
+preventable lives in Nigeria and beyond.*
     """)
 
