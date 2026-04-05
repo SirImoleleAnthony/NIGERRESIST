@@ -478,7 +478,7 @@ def plot_species_by_age(df, antibiotic_name, top_n=10):
 
     top_species = df_filtered['Species'].value_counts().head(top_n).index
     df_top = df_filtered[df_filtered['Species'].isin(top_species)]
-    age_order = ['0 to 2 Years', '3 to 12 Years', '13 to 18 Years', '19 to 64 Years', '65+ Years', 'Unknown']
+    age_order = ['0 to 2 Years', '3 to 12 Years', '13 to 18 Years', '19 to 64 Years', '65 to 84 Years', '85 and Over', 'Unknown']
     counts = df_top.groupby(['Species', 'Age Group']).size().reset_index(name='Count')
     counts['Age Group'] = pd.Categorical(counts['Age Group'], categories=age_order, ordered=True)
     counts = counts.sort_values('Age Group')
@@ -490,7 +490,7 @@ def plot_species_by_age(df, antibiotic_name, top_n=10):
 
     # Observation: children vs adults
     children = ['0 to 2 Years', '3 to 12 Years']
-    adults = ['19 to 64 Years', '65+ Years']
+    adults = ['19 to 64 Years', '65 to 84 Years', '85 and Over']
     child_counts = df_top[df_top['Age Group'].isin(children)]['Species'].value_counts()
     adult_counts = df_top[df_top['Age Group'].isin(adults)]['Species'].value_counts()
     obs = f"In children (≤12 years), the most common species is **{child_counts.index[0]}** ({child_counts.values[0]} isolates). "
