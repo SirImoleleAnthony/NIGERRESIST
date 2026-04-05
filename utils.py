@@ -226,7 +226,8 @@ def plot_by_age(df, antibiotic_name):
     if df_filtered.empty:
         return None, f"No data for {antibiotic_name}.", {}
 
-    age_order = ['0 to 2 Years', '3 to 12 Years', '13 to 18 Years', '19 to 64 Years', '65+ Years', 'Unknown']
+    #age_order = ['0 to 2 Years', '3 to 12 Years', '13 to 18 Years', '19 to 64 Years', '65+ Years', 'Unknown']
+    age_order = ['0 to 2 Years', '3 to 12 Years', '13 to 18 Years', '19 to 64 Years', '65 to 84 Years', '85 and Over', 'Unknown']
     rates = get_category_rates(df_filtered, 'Age Group')
     
     # Filter out NaN values
@@ -246,7 +247,8 @@ def plot_by_age(df, antibiotic_name):
 
     # Add explanation if children vs adults
     child_groups = ['0 to 2 Years', '3 to 12 Years']
-    adult_groups = ['19 to 64 Years', '65+ Years']
+    adult_groups = ['19 to 64 Years', '65 to 84 Years', '85 and Over']
+    # adults= ['19 to 64 Years', '65+ Years']
     child_rate = rates_display[rates_display['Age Group'].isin(child_groups)]['rate'].mean()
     adult_rate = rates_display[rates_display['Age Group'].isin(adult_groups)]['rate'].mean()
     obs += f" On average, children under 13 have a resistance rate of {child_rate:.1f}%, while adults have {adult_rate:.1f}%."
