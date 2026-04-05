@@ -50,7 +50,7 @@ from rag_system import RAGSystem, initialize_rag_system
 
 
 #-----------Web page setting-------------------#
-page_title = "Nigeria AMR Hub"
+page_title = "NaijaResist"
 page_icon = "🦠🧬💊"
 picker_icon = "👇"
 #layout = "centered"
@@ -111,7 +111,7 @@ if selected == 'Home':
             margin-bottom: 1.5rem;
         ">
             <h1 style="margin:0 0 0.4rem 0; font-size:2.1rem;">
-                🦠🧬💊 Welcome to the <span style="color:#0d6efd;">Nigeria AMR Hub</span>
+                🦠🧬💊 Welcome to <span style="color:#0d6efd;">NaijaResist</span>
             </h1>
             <p style="font-size:1.1rem; margin:0; color:#444;">
                 A data-driven intelligence platform for understanding, predicting, and communicating 
@@ -136,7 +136,7 @@ In Nigeria — home to Africa's largest population — the problem is especially
 limited surveillance infrastructure, high antibiotic use, and under-resourced laboratories 
 make it difficult to know *which drugs still work* and *where resistance is spreading*.  
 
-The **Nigeria AMR Hub** was built to change that.  
+**NaijaResist** was built to change that.  
 By combining a curated AMR dataset with machine learning, Bayesian modelling, causal inference, 
 and AI-powered document retrieval, this platform puts powerful analytical tools directly in the 
 hands of the people who need them most.
@@ -1048,7 +1048,7 @@ elif selected == 'About':
             margin-bottom: 1.5rem;
         ">
             <h1 style="margin:0 0 0.4rem 0; font-size:2.1rem;">
-                About the 🦠🧬💊 Nigeria AMR Hub
+                About 🦠🧬💊 NaijaResist
             </h1>
             <p style="font-size:1.05rem; margin:0; color:#444;">
                 Open-source · Data-driven · Built for Africa
@@ -1058,10 +1058,54 @@ elif selected == 'About':
         unsafe_allow_html=True,
     )
 
+    # ── Origin story ─────────────────────────────────────────────────────────
+    st.markdown("## ✨ The Moment That Sparked NaijaResist")
+    st.markdown("""
+> *What if Africa could predict antimicrobial resistance instead of reacting to it?*
+
+NaijaResist did not begin as an app.
+
+It began as a question asked during the **[Nigeria LNG Prize for Science](https://www.thenigeriaprizes.org/?page_id=15384)** 
+global health innovation competition.
+
+During this *LNG-supported innovation competition*, our team confronted a hard truth:  
+Nigeria produces valuable microbial and genomic data every day — yet lacks integrated AI 
+infrastructure capable of transforming that data into actionable national intelligence.
+
+While other teams proposed solutions built for well-resourced environments, we chose a harder path:
+
+*Build a system designed specifically for Nigeria's realities — fragmented data, limited 
+resources, and urgent clinical need.*
+
+That decision transformed a research idea into a national mission.
+
+NaijaResist emerged from this challenge as more than a project.  
+It became a commitment to build Africa's first AI-driven antimicrobial resistance 
+intelligence platform.
+    """)
+
+    st.markdown("## 🏆 Why the LNG Competition Matters to This Story")
+    st.markdown("""
+The [Nigeria LNG Prize for Science](https://www.thenigeriaprizes.org/?page_id=15384) 
+represented more than funding or recognition.
+
+It validated a belief:  
+**Nigeria's greatest innovations will come from scientists solving Nigerian problems.**
+
+Through this platform, NaijaResist evolved from academic research into translational 
+innovation — bridging laboratory science, artificial intelligence, and public health policy.
+
+The competition challenged us to move beyond publication and toward impact.
+
+**NaijaResist is our answer.**
+    """)
+
+    st.divider()
+
     # ── Platform overview ─────────────────────────────────────────────────────
     st.markdown("## 🌐 The Platform")
     st.markdown("""
-The **Nigeria AMR Hub** is an open, data-driven intelligence platform dedicated to 
+**NaijaResist** is an open, data-driven intelligence platform dedicated to 
 understanding, tracking, and predicting antimicrobial resistance (AMR) in Nigeria.  
 
 Antimicrobial resistance — the ability of bacteria, viruses, fungi, and parasites to 
@@ -1105,7 +1149,7 @@ decision, ultimately reducing preventable deaths from resistant infections.
     # ── What makes it different ───────────────────────────────────────────────
     st.markdown("## ⚙️ Technical Approach")
     st.markdown("""
-The Nigeria AMR Hub is built on a modern, modular technical stack designed for 
+NaijaResist is built on a modern, modular technical stack designed for 
 reproducibility and extensibility:
 
 | Component | Technology |
@@ -1147,7 +1191,7 @@ whose surveillance work produced the underlying data that powers this platform.
     # ── Team ─────────────────────────────────────────────────────────────────
     st.markdown("## 👥 Meet the Team")
     st.markdown("""
-The **Nigeria AMR Hub** team is a group of dedicated individuals committed to advancing 
+The **NaijaResist** team is a group of dedicated individuals committed to advancing 
 the fight against antimicrobial resistance through innovative data analysis and machine 
 learning techniques. Our team consists of data scientists, bioinformaticians, and 
 healthcare professionals who are passionate about leveraging technology to improve 
@@ -1215,7 +1259,7 @@ patient outcomes and public health.
     # ── Disclaimer ────────────────────────────────────────────────────────────
     st.markdown("## ⚠️ Disclaimer")
     st.warning("""
-The Nigeria AMR Hub is intended for **research, education, and public health informatics purposes only**.  
+NaijaResist is intended for **research, education, and public health informatics purposes only**.  
 It is **not a clinical diagnostic tool**.  
 Predictions and analyses generated by this platform should **not** replace professional 
 medical judgement, laboratory confirmation, or established clinical guidelines.  
