@@ -1,6 +1,5 @@
 """
 RAG System for Interactive Data Chat — LangChain backend
-
 """
 
 from __future__ import annotations
@@ -42,15 +41,6 @@ _load_env_file()
 
 
 def _get_api_key() -> str:
-    """
-    Return the OpenAI API key.
-
-    Resolution order:
-    1. st.secrets (Streamlit Cloud / local .streamlit/secrets.toml)
-    2. OPENAI_API_KEY environment variable / .env file
-    """
-    # 1. Try Streamlit secrets first (works on Streamlit Cloud and locally
-    #    when .streamlit/secrets.toml is present)
     try:
         import streamlit as st
         key = st.secrets.get("OPENAI_API_KEY")
@@ -58,8 +48,6 @@ def _get_api_key() -> str:
             return key
     except Exception:
         pass
-
-    # 2. Fall back to environment variable / .env file
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         _load_env_file()
@@ -89,7 +77,6 @@ _splitter = RecursiveCharacterTextSplitter(
 )
 
 def _load_pdfs(pdf_folder: str) -> List[Document]:
-    """Load all PDFs from *pdf_folder* as LangChain Documents."""
     docs: List[Document] = []
     pdf_path = Path(pdf_folder)
     if not pdf_path.exists():
@@ -133,18 +120,6 @@ def _load_pdfs(pdf_folder: str) -> List[Document]:
 
 
 def _csv_to_documents(df: pd.DataFrame, filename: str) -> List[Document]:
-    """
-    Convert a DataFrame to searchable LangChain Documents.
-
-    For AMR-like datasets (contain antibiotic columns) it creates rich
-    summary documents:
-      - one global dataset overview
-      - one per-antibiotic resistance summary
-      - one per-species resistance profile
-      - up to 200 sampled raw rows (for specific-record look-ups)
-
-    For generic CSVs it embeds raw rows (capped at 500).
-    """
     docs: List[Document] = []
     base_meta = {"source": filename, "type": "csv"}
 
@@ -324,7 +299,6 @@ Say "I don't have data about [topic]" \u2014 do NOT refuse to analyse what IS av
 # ---------------------------------------------------------------------------
 
 class RAGSystem:
-    """LangChain-backed RAG system using FAISS for vector search."""
 
     CACHE_DIR = "rag_cache"
     FAISS_INDEX_DIR = os.path.join("rag_cache", "faiss_lc")
@@ -354,7 +328,7 @@ class RAGSystem:
     def _get_llm(self) -> ChatOpenAI:
         if self._llm is None:
             self._llm = ChatOpenAI(
-                model="gpt-4o-mini",
+                model="gpt-5.4-mini",
                 temperature=0.2,
                 max_tokens=1500,
                 openai_api_key=_get_api_key(),
@@ -366,7 +340,6 @@ class RAGSystem:
     # ------------------------------------------------------------------
 
     def load_base_documents(self, pdf_folder: str) -> None:
-        """Load PDFs from *pdf_folder* into the internal document store."""
         pdf_lc = _load_pdfs(pdf_folder)
         self._lc_docs.extend(pdf_lc)
         self.documents.extend(
@@ -375,7 +348,6 @@ class RAGSystem:
         print(f"Loaded {len(pdf_lc)} PDF chunks")
 
     def load_csv_file(self, csv_path: str) -> None:
-        """Load a CSV file from disk and index it via summary documents."""
         try:
             df = pd.read_csv(csv_path)
         except Exception as e:
@@ -390,7 +362,6 @@ class RAGSystem:
         print(f"Loaded {len(csv_lc)} documents from {filename}")
 
     def reload_base_documents(self, pdf_folder: str) -> None:
-        """Reload PDFs, preserving any user-uploaded CSV documents."""
         csv_lc = [d for d in self._lc_docs if d.metadata.get("type") == "csv"]
         csv_dict = [d for d in self.documents if d.get("type") == "csv"]
         self._lc_docs = csv_lc
@@ -403,7 +374,6 @@ class RAGSystem:
         print(f"Reloaded {len(pdf_lc)} PDF chunks.  Total: {len(self.documents)}")
 
     def add_user_csv(self, csv_bytes: bytes, filename: str) -> None:
-        """Index a user-uploaded CSV and append it to the live vector store."""
         try:
             df = pd.read_csv(BytesIO(csv_bytes))
         except Exception as e:
@@ -439,11 +409,6 @@ class RAGSystem:
         show_progress: bool = False,
         force_rebuild: bool = False,
     ) -> bool:
-        """
-        Build (or load from cache) the FAISS vector store.
-
-        Returns True on success, False otherwise.
-        """
         # All docs loaded from disk (PDFs or pre-loaded CSVs): persisted to cache
         base_lc = [d for d in self._lc_docs if d.metadata.get("type") in ("pdf", "csv")]
         # User-uploaded CSVs that arrived after initialization (runtime only)
@@ -525,10 +490,6 @@ class RAGSystem:
     # ------------------------------------------------------------------
 
     def search_documents(self, query: str, k: int = 5) -> List[Dict]:
-        """
-        Search the FAISS index and return up to *k* matching document dicts.
-        CSV documents are surfaced first when the user has uploaded a file.
-        """
         if self._vectorstore is None:
             return []
 
@@ -562,11 +523,6 @@ class RAGSystem:
     # ------------------------------------------------------------------
 
     def chat(self, user_message: str) -> Tuple[str, List[Dict]]:
-        """
-        Generate a RAG-grounded answer to *user_message*.
-
-        Returns (assistant_text, list_of_source_dicts).
-        """
         from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 
         self.conversation_history.append({"role": "user", "content": user_message})
@@ -703,21 +659,6 @@ def initialize_rag_system(
     show_progress: bool = False,
     force_rebuild: bool = False,
 ) -> RAGSystem:
-    """
-    Initialise a LangChain-backed RAGSystem.
-
-    Parameters
-    ----------
-    pdf_folder : str
-        Directory containing ``.pdf`` files to index.
-    csv_path : str, optional
-        Path to a CSV file to auto-load (e.g. the main AMR dataset).
-        Indexed as summary documents so aggregate queries work well.
-    show_progress : bool
-        Show Streamlit progress elements during the first-time build.
-    force_rebuild : bool
-        Ignore the disk cache and regenerate all embeddings.
-    """
     rag = RAGSystem()
     rag.load_base_documents(pdf_folder)
 
